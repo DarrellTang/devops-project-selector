@@ -7,47 +7,47 @@ export const trackData: TrackData = {
       {
         id: 'beginner',
         title: "I'm new to DevOps",
-        description: "I code but haven't done much with deployment/infrastructure"
+        description: "I code but new to deployment"
       },
       {
         id: 'git',
         title: "I know Git well",
-        description: "Comfortable with branching, pull requests, GitHub/GitLab"
+        description: "I use Git branching & PRs"
       },
       {
         id: 'cicd',
         title: "I have CI/CD for building and testing",
-        description: "GitHub Actions or similar builds and tests my code automatically"
+        description: "GitHub Actions builds my code"
       },
       {
         id: 'vms',
         title: "I can provision and deploy to VMs",
-        description: "I've created cloud VMs and deployed my app to them"
+        description: "I deploy apps to cloud VMs"
       },
       {
         id: 'containers',
         title: "I use containers locally",
-        description: "I've containerized my app and run it with Docker"
+        description: "Docker run, build, compose"
       },
       {
         id: 'deploy',
         title: "I deploy containers to cloud services",
-        description: "My containers run on Cloud Run, ECS, etc."
+        description: "Cloud Run, ECS, etc."
       },
       {
         id: 'k8s-local',
         title: "I use local Kubernetes",
-        description: "I've deployed apps to kind, Docker Desktop K8s, or similar"
+        description: "kind, Docker Desktop K8s"
       },
       {
         id: 'k8s-cloud',
         title: "I use managed Kubernetes",
-        description: "I deploy to EKS, GKE, AKS or similar managed clusters"
+        description: "EKS, GKE, AKS clusters"
       },
       {
         id: 'bridge',
         title: "🌉 Bridge Level: Learn Operations",
-        description: "Ready to learn infrastructure, scaling, and production operations",
+        description: "Ready to learn infrastructure & ops",
         isBridge: true
       }
     ],
@@ -211,42 +211,42 @@ export const trackData: TrackData = {
       {
         id: 'beginner',
         title: "I'm new to DevOps",
-        description: "I manage servers but haven't used much automation"
+        description: "I manage servers, little automation"
       },
       {
         id: 'git',
         title: "I know Git basics",
-        description: "Can commit, push, pull, understand repositories"
+        description: "I know Git commit, push, pull"
       },
       {
         id: 'infrastructure',
         title: "I provision infrastructure with code",
-        description: "I use Terraform, CloudFormation, or similar tools"
+        description: "I use Terraform/CloudFormation"
       },
       {
         id: 'iac',
         title: "I have automated infrastructure deployment",
-        description: "My infrastructure deploys via CI/CD pipelines"
+        description: "I deploy infra via CI/CD"
       },
       {
         id: 'containers',
         title: "I deploy applications with containers",
-        description: "I understand Docker and container deployment workflows"
+        description: "I understand Docker & orchestration"
       },
       {
         id: 'k8s-local',
         title: "I use local Kubernetes",
-        description: "I've worked with kind, Docker Desktop K8s, or local clusters"
+        description: "Local clusters for learning & testing"
       },
       {
         id: 'k8s-cloud',
         title: "I manage production Kubernetes",
-        description: "I operate EKS, GKE, AKS or similar managed clusters"
+        description: "I operate live EKS/GKE/AKS clusters"
       },
       {
         id: 'bridge',
         title: "🌉 Bridge Level: Learn Development",
-        description: "Ready to build applications and understand development workflows",
+        description: "Ready to learn coding & app development",
         isBridge: true
       }
     ],
