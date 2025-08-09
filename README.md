@@ -67,12 +67,43 @@ This tool is based on the idea that DevOps is best learned through:
 
 ## 🏃‍♂️ Quick Start
 
-Just open [the tool](https://darrelltang.github.io/devops-project-selector/) and:
+### Online
+Visit [the live tool](https://darrelltang.github.io/devops-project-selector/):
 
 1. Click your background (Developer or Operations)
 2. Click your current skill level
 3. Start with the first recommended project
 4. Come back when you're done to see what's next
+
+### Local Development
+```bash
+git clone https://github.com/DarrellTang/devops-project-selector.git
+cd devops-project-selector
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to see the tool running locally.
+
+## 🛠️ Technical Architecture
+
+The tool is built with modern web technologies for better maintainability and user experience:
+
+- **Next.js 15** with App Router for server-side rendering and routing
+- **TypeScript** for type safety and better developer experience  
+- **Tailwind CSS** for responsive styling
+- **shadcn/ui** components for consistent, accessible UI
+- **Shareable URLs** - `/dev/containers`, `/ops/k8s-cloud`, etc.
+
+### Project Structure
+```
+src/
+├── app/                 # Next.js app router pages
+├── components/         # React components
+├── data/               # Project and track data
+├── types/              # TypeScript interfaces
+└── lib/                # Utility functions
+```
 
 ## 🤝 Contributing
 
