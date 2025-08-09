@@ -9,26 +9,28 @@ interface TrackSelectorProps {
 
 export function TrackSelector({ selectedTrack, onTrackSelect }: TrackSelectorProps) {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          🚀 What&apos;s your background?
+    <Card className="glass-dark border-0 rounded-2xl overflow-hidden">
+      <CardHeader className="pb-4 bg-gradient-to-r from-slate-800/50 to-slate-700/50">
+        <CardTitle className="flex items-center gap-2 text-lg font-bold bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">
+          🚀 Your Background
         </CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <CardContent className="p-4">
+        <div className="space-y-4">
           <Button
             variant="outline"
             onClick={() => onTrackSelect('dev')}
             className={cn(
-              "h-auto p-6 flex flex-col items-center space-y-2 text-center",
-              selectedTrack === 'dev' && "border-emerald-500 bg-emerald-50 hover:bg-emerald-100"
+              "h-28 w-full p-3 flex flex-col items-center justify-center space-y-1 text-center border-2 transition-all duration-500 hover:scale-105 rounded-xl backdrop-blur-sm",
+              selectedTrack === 'dev' 
+                ? "border-emerald-400/60 bg-gradient-to-br from-emerald-900/40 to-green-900/40 neon-glow-emerald scale-105" 
+                : "border-slate-600/50 hover:border-emerald-400/40 bg-slate-800/40 hover:bg-slate-700/50"
             )}
           >
-            <div className="text-3xl">💻</div>
-            <div className="text-lg font-semibold">Developer Track</div>
-            <div className="text-sm text-muted-foreground">
-              I write code, build apps, know programming languages
+            <div className="text-2xl drop-shadow-lg filter brightness-110">💻</div>
+            <div className="text-sm font-bold text-emerald-300">Developer Track</div>
+            <div className="text-xs text-slate-300 leading-tight px-1">
+              I write code & build apps
             </div>
           </Button>
           
@@ -36,14 +38,16 @@ export function TrackSelector({ selectedTrack, onTrackSelect }: TrackSelectorPro
             variant="outline"
             onClick={() => onTrackSelect('ops')}
             className={cn(
-              "h-auto p-6 flex flex-col items-center space-y-2 text-center",
-              selectedTrack === 'ops' && "border-amber-500 bg-amber-50 hover:bg-amber-100"
+              "h-28 w-full p-3 flex flex-col items-center justify-center space-y-1 text-center border-2 transition-all duration-500 hover:scale-105 rounded-xl backdrop-blur-sm",
+              selectedTrack === 'ops' 
+                ? "border-amber-400/60 bg-gradient-to-br from-amber-900/40 to-orange-900/40 neon-glow-amber scale-105" 
+                : "border-slate-600/50 hover:border-amber-400/40 bg-slate-800/40 hover:bg-slate-700/50"
             )}
           >
-            <div className="text-3xl">⚙️</div>
-            <div className="text-lg font-semibold">Operations Track</div>
-            <div className="text-sm text-muted-foreground">
-              I manage servers, infrastructure, know Linux/Windows
+            <div className="text-2xl drop-shadow-lg filter brightness-110">⚙️</div>
+            <div className="text-sm font-bold text-amber-300">Operations Track</div>
+            <div className="text-xs text-slate-300 leading-tight px-1">
+              I manage servers & infra
             </div>
           </Button>
         </div>
