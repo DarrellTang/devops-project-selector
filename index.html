@@ -1,0 +1,49 @@
+                    <div class="project-description">${project.description}</div>
+                    <div class="project-why">${project.why}</div>
+                    ${project.progression ? `<div class="progression-indicator">${project.progression}</div>` : ''}
+                `;
+                projectsContainer.appendChild(projectCard);
+            });
+            
+            if (projects.length === 0) {
+                projectsContainer.innerHTML = `
+                    <div class="empty-state">
+                        <p>Select your current skills to see personalized project recommendations!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Add progression hint
+            const currentLevelIndex = trackData[track].levels.findIndex(l => l.id === levelId);
+            const nextLevel = trackData[track].levels[currentLevelIndex + 1];
+            
+            if (levelId === 'bridge') {
+                progressionHint.innerHTML = `
+                    <strong>🎉 Convergence Point!</strong> You're learning the other side of DevOps! 
+                    After completing these cross-training projects, you'll be a well-rounded DevOps engineer 
+                    ready for advanced topics like platform engineering, security, and team leadership.
+                `;
+            } else if (nextLevel) {
+                if (nextLevel.isBridge) {
+                    progressionHint.innerHTML = `
+                        <strong>🌉 Bridge Ahead!</strong> After completing these projects, you'll reach the 
+                        <strong>Bridge Level</strong> where you'll learn the other side of DevOps. 
+                        This is where ${track === 'dev' ? 'developers learn operations' : 'ops folks learn development'}!
+                    `;
+                } else {
+                    progressionHint.innerHTML = `
+                        <strong>Next up:</strong> After completing these projects, you'll be ready for 
+                        "${nextLevel.title}" - come back to see what unlocks next!
+                    `;
+                }
+            } else {
+                progressionHint.innerHTML = `
+                    <strong>🎯 Track Complete!</strong> You've mastered the ${track === 'dev' ? 'developer' : 'operations'} track. 
+                    Ready for the Bridge Level to learn the other side?
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
