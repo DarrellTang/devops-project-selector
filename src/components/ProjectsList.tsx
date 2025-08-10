@@ -1,6 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Badge } from '@/components/ui/badge';
 import { Target, ExternalLink, CheckCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { Project, Level } from '@/types';
@@ -45,7 +44,7 @@ export function ProjectsList({ track, levelId, projects, levels }: ProjectsListP
     return { icon: '🏗️', type: 'build', text: progression };
   };
   
-  const getProgressionBadgeStyles = (type: string, track: string) => {
+  const getProgressionBadgeStyles = (type: string) => {
     const baseStyles = "px-3 py-1.5 rounded-full text-xs font-bold border backdrop-blur-sm shadow-lg flex items-center gap-1";
     
     switch (type) {
@@ -153,7 +152,7 @@ export function ProjectsList({ track, levelId, projects, levels }: ProjectsListP
                       <CardContent className="p-4">
                         <div className="flex justify-between items-start mb-3">
                           {progressionProps && (
-                            <div className={getProgressionBadgeStyles(progressionProps.type, project.track)}>
+                            <div className={getProgressionBadgeStyles(progressionProps.type)}>
                               <span className="flex-shrink-0">{progressionProps.icon}</span>
                               <span className="truncate">{progressionProps.type.toUpperCase()}</span>
                             </div>
@@ -197,7 +196,7 @@ export function ProjectsList({ track, levelId, projects, levels }: ProjectsListP
                           </div>
                         </div>
                         {progressionProps && (
-                          <div className={getProgressionBadgeStyles(progressionProps.type, project.track)}>
+                          <div className={getProgressionBadgeStyles(progressionProps.type)}>
                             <span>{progressionProps.icon}</span>
                             <span>{progressionProps.type.toUpperCase()}</span>
                           </div>
@@ -208,7 +207,7 @@ export function ProjectsList({ track, levelId, projects, levels }: ProjectsListP
                     <div className="space-y-6">
                       {/* Description */}
                       <div>
-                        <h3 className="text-lg font-semibold mb-2 text-slate-200">What You'll Do</h3>
+                        <h3 className="text-lg font-semibold mb-2 text-slate-200">What You&apos;ll Do</h3>
                         <p className="text-slate-300 leading-relaxed">{project.description}</p>
                       </div>
                       
@@ -218,7 +217,7 @@ export function ProjectsList({ track, levelId, projects, levels }: ProjectsListP
                           <div className="flex items-start gap-3">
                             <Target className="w-5 h-5 text-cyan-300 mt-0.5 flex-shrink-0" />
                             <div>
-                              <h3 className="text-lg font-semibold text-cyan-300 mb-2">You'll Learn</h3>
+                              <h3 className="text-lg font-semibold text-cyan-300 mb-2">You&apos;ll Learn</h3>
                               <p className="text-cyan-100 leading-relaxed">{progressionProps.text}</p>
                             </div>
                           </div>
