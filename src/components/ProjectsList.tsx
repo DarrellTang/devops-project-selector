@@ -65,104 +65,21 @@ export function ProjectsList({ track, levelId, projects, levels }: ProjectsListP
   };
   
   const getProjectResources = (project: Project) => {
-    // This would eventually come from project data, for now we'll mock some based on project type
-    const resources = [];
-    
-    if (project.title.toLowerCase().includes('git')) {
-      resources.push(
-        { title: 'Git Documentation', url: 'https://git-scm.com/doc' },
-        { title: 'GitHub Flow Guide', url: 'https://guides.github.com/introduction/flow/' }
-      );
-    }
-    if (project.title.toLowerCase().includes('docker') || project.title.toLowerCase().includes('container')) {
-      resources.push(
-        { title: 'Docker Get Started', url: 'https://docs.docker.com/get-started/' },
-        { title: 'Docker Best Practices', url: 'https://docs.docker.com/develop/dev-best-practices/' }
-      );
-    }
-    if (project.title.toLowerCase().includes('kubernetes') || project.title.toLowerCase().includes('k8s')) {
-      resources.push(
-        { title: 'Kubernetes Basics', url: 'https://kubernetes.io/docs/tutorials/kubernetes-basics/' },
-        { title: 'kubectl Cheat Sheet', url: 'https://kubernetes.io/docs/reference/kubectl/cheatsheet/' }
-      );
-    }
-    if (project.title.toLowerCase().includes('ci/cd') || project.title.toLowerCase().includes('github actions')) {
-      resources.push(
-        { title: 'GitHub Actions Docs', url: 'https://docs.github.com/en/actions' },
-        { title: 'CI/CD Best Practices', url: 'https://docs.github.com/en/actions/learn-github-actions/essential-features-of-github-actions' }
-      );
-    }
-    if (project.title.toLowerCase().includes('terraform') || project.title.toLowerCase().includes('infrastructure')) {
-      resources.push(
-        { title: 'Terraform Get Started', url: 'https://developer.hashicorp.com/terraform/tutorials' },
-        { title: 'Infrastructure as Code', url: 'https://developer.hashicorp.com/terraform/intro' }
-      );
-    }
-    
-    return resources;
+    return project.resources || [];
   };
   
   const getProjectPrerequisites = (project: Project) => {
-    const prereqs = [];
-    
-    if (project.title.toLowerCase().includes('git')) {
-      prereqs.push('Git installed', 'GitHub account', 'Existing project or create new one');
-    }
-    if (project.title.toLowerCase().includes('docker') || project.title.toLowerCase().includes('container')) {
-      prereqs.push('Docker Desktop installed', 'Basic command line skills', 'Sample application to containerize');
-    }
-    if (project.title.toLowerCase().includes('kubernetes') || project.title.toLowerCase().includes('k8s')) {
-      prereqs.push('Docker knowledge', 'kubectl installed', 'Local K8s cluster (kind/Docker Desktop)');
-    }
-    if (project.title.toLowerCase().includes('cloud') || project.title.toLowerCase().includes('vm')) {
-      prereqs.push('Cloud account (AWS/Azure/GCP)', 'Basic networking knowledge', 'SSH key pair');
-    }
-    if (project.title.toLowerCase().includes('terraform')) {
-      prereqs.push('Terraform installed', 'Cloud account configured', 'Basic infrastructure concepts');
-    }
-    
-    return prereqs;
+    return project.prerequisites || [];
   };
   
   const getSuccessCriteria = (project: Project) => {
-    const criteria = [];
-    
-    if (project.title.toLowerCase().includes('git')) {
-      criteria.push(
-        'Can create feature branches and merge via PRs',
-        'Understands git workflow (add, commit, push, pull)',
-        'Can resolve basic merge conflicts'
-      );
-    }
-    if (project.title.toLowerCase().includes('docker') || project.title.toLowerCase().includes('container')) {
-      criteria.push(
-        'App runs identically in container and locally',
-        'Can build and run containers consistently',
-        'Understands Dockerfile basics and layers'
-      );
-    }
-    if (project.title.toLowerCase().includes('kubernetes')) {
-      criteria.push(
-        'Can deploy and access your app in K8s',
-        'Understands pods, services, and deployments',
-        'Can troubleshoot basic K8s issues'
-      );
-    }
-    if (project.title.toLowerCase().includes('ci/cd')) {
-      criteria.push(
-        'Code changes trigger automated builds',
-        'Tests run automatically on every commit',
-        'Can debug failed pipeline runs'
-      );
-    }
-    
-    return criteria;
+    return project.successCriteria || [];
   };
 
   const getProgressionHint = () => {
     if (levelId === 'bridge') {
       return (
-        <div className="bg-gradient-to-r from-purple-950/60 to-blue-950/60 border border-purple-400/40 rounded-xl p-4 backdrop-blur-sm">
+        <div className="bg-gradient-to-r from-purple-950/60 to-blue-950/60 border border-purple-400/40 rounded-xl p-4 backdrop-blur-sm break-words">
           <strong className="text-purple-300">🎉 Convergence Point!</strong> <span className="text-slate-300">You&apos;re learning the other side of DevOps! 
           After completing these cross-training projects, you&apos;ll be a well-rounded DevOps engineer 
           ready for advanced topics like platform engineering, security, and team leadership.</span>
@@ -171,7 +88,7 @@ export function ProjectsList({ track, levelId, projects, levels }: ProjectsListP
     } else if (nextLevel) {
       if (nextLevel.isBridge) {
         return (
-          <div className="bg-gradient-to-r from-purple-950/60 to-blue-950/60 border border-purple-400/40 rounded-xl p-4 backdrop-blur-sm">
+          <div className="bg-gradient-to-r from-purple-950/60 to-blue-950/60 border border-purple-400/40 rounded-xl p-4 backdrop-blur-sm break-words">
             <strong className="text-purple-300">🌉 Bridge Ahead!</strong> <span className="text-slate-300">After completing these projects, you&apos;ll reach the 
             </span><strong className="text-purple-200"> Bridge Level</strong> <span className="text-slate-300">where you&apos;ll learn the other side of DevOps. 
             This is where {track === 'dev' ? 'developers learn operations' : 'ops folks learn development'}!</span>
@@ -179,15 +96,15 @@ export function ProjectsList({ track, levelId, projects, levels }: ProjectsListP
         );
       } else {
         return (
-          <div className="bg-gradient-to-r from-blue-950/60 to-cyan-950/60 border border-blue-400/40 rounded-xl p-4 backdrop-blur-sm">
+          <div className="bg-gradient-to-r from-blue-950/60 to-cyan-950/60 border border-blue-400/40 rounded-xl p-4 backdrop-blur-sm break-words">
             <strong className="text-blue-300">Next up:</strong> <span className="text-slate-300">After completing these projects, you&apos;ll be ready for 
-            &ldquo;</span><strong className="text-blue-200">{nextLevel.title}</strong><span className="text-slate-300">&rdquo; - come back to see what unlocks next!</span>
+            &ldquo;</span><strong className="text-blue-200 break-words">{nextLevel.title}</strong><span className="text-slate-300">&rdquo; - come back to see what unlocks next!</span>
           </div>
         );
       }
     } else {
       return (
-        <div className="bg-gradient-to-r from-emerald-950/60 to-green-950/60 border border-emerald-400/40 rounded-xl p-4 backdrop-blur-sm">
+        <div className="bg-gradient-to-r from-emerald-950/60 to-green-950/60 border border-emerald-400/40 rounded-xl p-4 backdrop-blur-sm break-words">
           <strong className="text-emerald-300">🎯 Track Complete!</strong> <span className="text-slate-300">You&apos;ve mastered the {track === 'dev' ? 'developer' : 'operations'} track. 
           Ready for the Bridge Level to learn the other side?</span>
         </div>
@@ -210,13 +127,13 @@ export function ProjectsList({ track, levelId, projects, levels }: ProjectsListP
 
   return (
     <div className="h-full flex flex-col">
-      <Card className="flex-1 flex flex-col glass-dark border-0 rounded-2xl overflow-hidden">
-        <CardHeader className="sticky top-0 glass-dark z-10 border-b border-slate-600/30 bg-gradient-to-r from-slate-800/50 to-slate-700/50">
+      <Card className="flex-1 flex flex-col glass-dark border-0 rounded-2xl overflow-hidden gap-0" style={{paddingTop: 0, paddingBottom: 0}}>
+        <CardHeader className="sticky top-0 glass-dark z-10 border-b border-slate-600/30 bg-gradient-to-r from-slate-800/50 to-slate-700/50" style={{padding: '12px 16px 8px 16px'}}>
           <CardTitle className="flex items-center gap-2 text-lg font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
             ✨ Your Next Projects
           </CardTitle>
         </CardHeader>
-        <CardContent className="flex-1 overflow-y-auto p-3">
+        <CardContent className="flex-1 overflow-y-auto" style={{padding: '8px 16px 16px 16px'}}>
           <div className="space-y-3">
             {projects.map((project, index) => {
               const progressionProps = project.progression ? getProgressionBadgeProps(project.progression) : null;
@@ -226,7 +143,7 @@ export function ProjectsList({ track, levelId, projects, levels }: ProjectsListP
                   <DialogTrigger asChild>
                     <Card
                       className={cn(
-                        "cursor-pointer overflow-hidden border-l-4 bg-gradient-to-r shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.01] border border-slate-600/30 backdrop-blur-sm rounded-xl",
+                        "w-full cursor-pointer overflow-hidden border-l-4 bg-gradient-to-r shadow-xl hover:shadow-2xl transition-all duration-300 border border-slate-600/30 backdrop-blur-sm rounded-xl",
                         project.track === 'dev' && "border-l-emerald-400 from-emerald-950/40 via-slate-900/60 to-slate-800/40 hover:from-emerald-900/50 hover:to-slate-700/50",
                         project.track === 'ops' && "border-l-amber-400 from-amber-950/40 via-slate-900/60 to-slate-800/40 hover:from-amber-900/50 hover:to-slate-700/50",
                         project.track === 'bridge' && "border-l-purple-400 from-purple-950/40 via-slate-900/60 to-slate-800/40 hover:from-purple-900/50 hover:to-slate-700/50"
@@ -237,14 +154,14 @@ export function ProjectsList({ track, levelId, projects, levels }: ProjectsListP
                         <div className="flex justify-between items-start mb-3">
                           {progressionProps && (
                             <div className={getProgressionBadgeStyles(progressionProps.type, project.track)}>
-                              <span>{progressionProps.icon}</span>
-                              <span>{progressionProps.type.toUpperCase()}</span>
+                              <span className="flex-shrink-0">{progressionProps.icon}</span>
+                              <span className="truncate">{progressionProps.type.toUpperCase()}</span>
                             </div>
                           )}
                         </div>
                         
                         <h4 className={cn(
-                          "text-base font-bold leading-tight mb-2",
+                          "text-base font-bold leading-tight mb-2 break-words hyphens-auto",
                           project.track === 'dev' && "text-emerald-300 drop-shadow-sm",
                           project.track === 'ops' && "text-amber-300 drop-shadow-sm", 
                           project.track === 'bridge' && "text-purple-300 drop-shadow-sm"
@@ -252,7 +169,7 @@ export function ProjectsList({ track, levelId, projects, levels }: ProjectsListP
                           {project.title}
                         </h4>
                         
-                        <p className="text-slate-300 text-sm leading-relaxed">
+                        <p className="text-slate-300 text-sm leading-relaxed break-words">
                           {project.description}
                         </p>
                       </CardContent>
@@ -262,14 +179,23 @@ export function ProjectsList({ track, levelId, projects, levels }: ProjectsListP
                   <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-slate-900/95 border-slate-600 text-slate-100">
                     <DialogHeader>
                       <div className="flex items-center justify-between mb-4">
-                        <DialogTitle className={cn(
-                          "text-xl font-bold",
-                          project.track === 'dev' && "text-emerald-300",
-                          project.track === 'ops' && "text-amber-300", 
-                          project.track === 'bridge' && "text-purple-300"
-                        )}>
-                          {project.title}
-                        </DialogTitle>
+                        <div className="flex-1">
+                          <DialogTitle className={cn(
+                            "text-xl font-bold mb-2",
+                            project.track === 'dev' && "text-emerald-300",
+                            project.track === 'ops' && "text-amber-300", 
+                            project.track === 'bridge' && "text-purple-300"
+                          )}>
+                            {project.title}
+                          </DialogTitle>
+                          <div className="flex gap-2 items-center">
+                            {project.difficulty && (
+                              <span className="text-xs px-2 py-1 bg-slate-700 rounded-full text-slate-300 capitalize">
+                                {project.difficulty}
+                              </span>
+                            )}
+                          </div>
+                        </div>
                         {progressionProps && (
                           <div className={getProgressionBadgeStyles(progressionProps.type, project.track)}>
                             <span>{progressionProps.icon}</span>

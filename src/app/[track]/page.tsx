@@ -46,9 +46,9 @@ export default function TrackPage() {
       <div className="container mx-auto px-6 py-8 max-w-7xl relative z-10">
         <Header />
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[calc(100vh-200px)] min-h-[600px]">
+        <div className="relative h-[calc(100vh-160px)] min-h-[600px] hidden lg:block">
           {/* Left Column: Track Selection */}
-          <div className="lg:col-span-3">
+          <div className="absolute left-0 top-0 bottom-0" style={{width: 'calc(33.333% - 8px)'}}>
             <TrackSelector
               selectedTrack={selectedTrack}
               onTrackSelect={handleTrackSelect}
@@ -56,18 +56,17 @@ export default function TrackPage() {
           </div>
           
           {/* Middle Column: Level Selection */}
-          <div className="lg:col-span-4 overflow-y-auto">
+          <div className="absolute top-0 bottom-0 overflow-y-auto" style={{left: 'calc(33.333% + 4px)', width: 'calc(33.333% - 8px)'}}>
             <LevelSelector
               track={selectedTrack}
               selectedLevel={selectedLevel}
               onLevelSelect={handleLevelSelect}
               levels={trackData[selectedTrack].levels}
-              title={trackData[selectedTrack].title}
             />
           </div>
           
           {/* Right Column: Projects */}
-          <div className="lg:col-span-5 overflow-y-auto">
+          <div className="absolute top-0 bottom-0 right-0 overflow-y-auto" style={{width: 'calc(33.333% - 4px)'}}>
             {selectedLevel ? (
               <ProjectsList
                 track={selectedTrack}
@@ -82,6 +81,33 @@ export default function TrackPage() {
               </div>
             )}
           </div>
+        </div>
+        
+        {/* Mobile layout */}
+        <div className="flex flex-col gap-6 h-[calc(100vh-160px)] min-h-[600px] lg:hidden">
+          <TrackSelector
+            selectedTrack={selectedTrack}
+            onTrackSelect={handleTrackSelect}
+          />
+          <LevelSelector
+            track={selectedTrack}
+            selectedLevel={selectedLevel}
+            onLevelSelect={handleLevelSelect}
+            levels={trackData[selectedTrack].levels}
+          />
+          {selectedLevel ? (
+            <ProjectsList
+              track={selectedTrack}
+              levelId={selectedLevel}
+              projects={trackData[selectedTrack].projects[selectedLevel] || []}
+              levels={trackData[selectedTrack].levels}
+            />
+          ) : (
+            <div className="glass-dark rounded-2xl border border-slate-600/30 p-8 text-center">
+              <div className="text-6xl mb-4 filter brightness-125">👈</div>
+              <p className="text-slate-300 text-lg">Select a skill level to see your personalized project recommendations</p>
+            </div>
+          )}
         </div>
       </div>
     </div>

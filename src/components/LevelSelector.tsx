@@ -9,23 +9,23 @@ interface LevelSelectorProps {
   selectedLevel: string | null;
   onLevelSelect: (levelId: string) => void;
   levels: Level[];
-  title: string;
 }
 
 export function LevelSelector({ 
   track, 
   selectedLevel, 
   onLevelSelect, 
-  levels, 
-  title 
+  levels 
 }: LevelSelectorProps) {
   return (
     <div className="h-full flex flex-col">
-      <Card className="flex-1 flex flex-col glass-dark border-0 rounded-2xl overflow-hidden">
-        <CardHeader className="sticky top-0 glass-dark z-10 border-b border-slate-600/30 bg-gradient-to-r from-slate-800/50 to-slate-700/50">
-          <CardTitle className="text-lg font-bold bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">{title}</CardTitle>
+      <Card className="flex-1 flex flex-col glass-dark border-0 rounded-2xl gap-0" style={{paddingTop: 0, paddingBottom: 0}}>
+        <CardHeader className="sticky top-0 glass-dark z-10 border-b border-slate-600/30 bg-gradient-to-r from-slate-800/50 to-slate-700/50" style={{padding: '12px 16px 8px 16px'}}>
+          <CardTitle className="text-lg font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+            📊 Your Skills
+          </CardTitle>
         </CardHeader>
-        <CardContent className="flex-1 overflow-y-auto p-3">
+        <CardContent className="flex-1" style={{padding: '8px 16px 16px 16px'}}>
           <div className="space-y-3">
             {levels.map((level, index) => (
               <Button
@@ -33,7 +33,7 @@ export function LevelSelector({
                 variant="outline"
                 onClick={() => onLevelSelect(level.id)}
                 className={cn(
-                  "w-full h-auto p-2.5 flex items-start justify-between text-left border-2 transition-all duration-500 hover:scale-102 rounded-xl backdrop-blur-sm",
+                  "w-full h-auto p-3 flex items-start justify-between text-left border-2 transition-all duration-500 hover:scale-102 rounded-xl backdrop-blur-sm",
                   level.isBridge && "border-purple-400/60 bg-gradient-to-r from-purple-900/30 to-blue-900/30 hover:from-purple-800/40 hover:to-blue-800/40",
                   selectedLevel === level.id && !level.isBridge && track === 'dev' && "border-emerald-400/80 bg-gradient-to-r from-emerald-900/40 to-green-900/40 neon-glow-emerald scale-102",
                   selectedLevel === level.id && !level.isBridge && track === 'ops' && "border-amber-400/80 bg-gradient-to-r from-amber-900/40 to-orange-900/40 neon-glow-amber scale-102",
@@ -50,7 +50,7 @@ export function LevelSelector({
                     selectedLevel === level.id && track === 'ops' && !level.isBridge && "text-amber-300",
                     selectedLevel !== level.id && "text-slate-200"
                   )}>{level.title}</div>
-                  <div className="text-xs text-slate-400 line-clamp-3 leading-relaxed">{level.description}</div>
+                  <div className="text-xs text-slate-400 leading-relaxed">{level.description}</div>
                 </div>
                 <Badge 
                   variant="secondary" 
