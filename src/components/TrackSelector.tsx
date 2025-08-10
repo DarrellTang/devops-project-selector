@@ -9,13 +9,13 @@ interface TrackSelectorProps {
 
 export function TrackSelector({ selectedTrack, onTrackSelect }: TrackSelectorProps) {
   return (
-    <Card className="glass-dark border-0 rounded-2xl overflow-hidden">
-      <CardHeader className="pb-4 bg-gradient-to-r from-slate-800/50 to-slate-700/50">
+    <Card className="glass-dark border-0 rounded-2xl overflow-hidden gap-0" style={{paddingTop: 0, paddingBottom: 0}}>
+      <CardHeader className="sticky top-0 glass-dark z-10 border-b border-slate-600/30 bg-gradient-to-r from-slate-800/50 to-slate-700/50" style={{padding: '12px 16px 8px 16px'}}>
         <CardTitle className="flex items-center gap-2 text-lg font-bold bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">
           🚀 Your Background
         </CardTitle>
       </CardHeader>
-      <CardContent className="p-4">
+      <CardContent style={{padding: '8px 16px 16px 16px'}}>
         <div className="space-y-4">
           <Button
             variant="outline"
