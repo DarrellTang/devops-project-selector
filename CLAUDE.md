@@ -8,11 +8,13 @@ DevOps Project Selector is a single-page web application that helps developers a
 
 ## Architecture
 
-This is a self-contained static HTML application with no build system or external dependencies:
+This is a Next.js application deployed on Vercel:
 
-- **index.html**: Complete application with embedded CSS and JavaScript (839 lines)
-- **README.md**: Comprehensive documentation explaining the tool's purpose and learning philosophy  
-- **Hosted on GitHub Pages**: Live at https://darrelltang.github.io/devops-project-selector/
+- **Next.js framework**: React-based with TypeScript support
+- **Component-based architecture**: Modular UI components in src/components/
+- **App Router**: Using Next.js 13+ app directory structure
+- **Analytics**: Vercel Analytics and Speed Insights integrated
+- **Deployed on Vercel**: Live deployment with automatic builds from git
 
 ## Core Data Structure
 
@@ -52,11 +54,12 @@ Each level contains 2-3 specific projects with:
 
 ## Development Workflow
 
-Since this is a static site with no build process:
-- All changes made directly to index.html
-- Test by opening index.html in browser  
-- No package managers, bundlers, or compilation required
-- Deploy by pushing to GitHub (auto-published via GitHub Pages)
+Standard Next.js development workflow:
+- Run `npm run dev` for local development server
+- Components are in src/components/, pages in src/app/
+- TypeScript compilation and type checking
+- Deploy by pushing to git (auto-deployed via Vercel)
+- Analytics data available in Vercel dashboard
 
 ## Testing Approach
 
