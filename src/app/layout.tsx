@@ -32,6 +32,7 @@ export default function RootLayout({
         {children}
         <Analytics />
         <SpeedInsights />
+        {/* Analytics enabled in dashboard */}
       </body>
     </html>
   );
