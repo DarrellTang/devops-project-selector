@@ -6,6 +6,7 @@ import { trackData } from '@/data/tracks';
 import { TrackSelector } from '@/components/TrackSelector';
 import { LevelSelector } from '@/components/LevelSelector';
 import { ProjectsList } from '@/components/ProjectsList';
+import { MobileTabNavigation } from '@/components/MobileTabNavigation';
 import { Header } from '@/components/Header';
 
 export default function TrackLevelPage() {
@@ -95,22 +96,14 @@ export default function TrackLevelPage() {
         </div>
         
         {/* Mobile layout */}
-        <div className="flex flex-col gap-6 h-[calc(100vh-160px)] min-h-[600px] lg:hidden">
-          <TrackSelector
-            selectedTrack={selectedTrack}
-            onTrackSelect={handleTrackSelect}
-          />
-          <LevelSelector
+        <div className="h-[calc(100vh-160px)] min-h-[600px] lg:hidden">
+          <MobileTabNavigation
             track={selectedTrack}
             selectedLevel={selectedLevel}
+            onTrackSelect={handleTrackSelect}
             onLevelSelect={handleLevelSelect}
             levels={trackData[selectedTrack].levels}
-          />
-          <ProjectsList
-            track={selectedTrack}
-            levelId={selectedLevel}
-            projects={trackData[selectedTrack].projects[selectedLevel] || []}
-            levels={trackData[selectedTrack].levels}
+            projects={trackData[selectedTrack].projects}
           />
         </div>
       </div>
