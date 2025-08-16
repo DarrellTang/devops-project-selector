@@ -6,6 +6,8 @@ import { trackData } from '@/data/tracks';
 import { TrackSelector } from '@/components/TrackSelector';
 import { LevelSelector } from '@/components/LevelSelector';
 import { ProjectsList } from '@/components/ProjectsList';
+import { MobileLevelSelector } from '@/components/MobileLevelSelector';
+import { MobileTabNavigation } from '@/components/MobileTabNavigation';
 import { Header } from '@/components/Header';
 
 export default function TrackPage() {
@@ -84,30 +86,15 @@ export default function TrackPage() {
         </div>
         
         {/* Mobile layout */}
-        <div className="flex flex-col gap-6 h-[calc(100vh-160px)] min-h-[600px] lg:hidden">
-          <TrackSelector
-            selectedTrack={selectedTrack}
-            onTrackSelect={handleTrackSelect}
-          />
-          <LevelSelector
+        <div className="h-[calc(100vh-160px)] min-h-[600px] lg:hidden">
+          <MobileTabNavigation
             track={selectedTrack}
             selectedLevel={selectedLevel}
+            onTrackSelect={handleTrackSelect}
             onLevelSelect={handleLevelSelect}
             levels={trackData[selectedTrack].levels}
+            projects={trackData[selectedTrack].projects}
           />
-          {selectedLevel ? (
-            <ProjectsList
-              track={selectedTrack}
-              levelId={selectedLevel}
-              projects={trackData[selectedTrack].projects[selectedLevel] || []}
-              levels={trackData[selectedTrack].levels}
-            />
-          ) : (
-            <div className="glass-dark rounded-2xl border border-slate-600/30 p-8 text-center">
-              <div className="text-6xl mb-4 filter brightness-125">👈</div>
-              <p className="text-slate-300 text-lg">Select a skill level to see your personalized project recommendations</p>
-            </div>
-          )}
         </div>
       </div>
     </div>
