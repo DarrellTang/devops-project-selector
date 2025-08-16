@@ -35,14 +35,14 @@ export function MobileTabNavigation({
   const currentSelectedLevel = internalSelectedLevel || selectedLevel;
   const currentTrack = internalSelectedTrack || track;
 
-  // Temporarily disable auto-advance to test manual tab switching
-  // useEffect(() => {
-  //   if (currentTrack && !currentSelectedLevel && activeTab === 'track') {
-  //     setActiveTab('level');
-  //   } else if (currentTrack && currentSelectedLevel && activeTab === 'level') {
-  //     setActiveTab('projects');
-  //   }
-  // }, [currentTrack, currentSelectedLevel]);
+  // Auto-advance logic
+  useEffect(() => {
+    if (currentTrack && !currentSelectedLevel && activeTab === 'track') {
+      setActiveTab('level');
+    } else if (currentTrack && currentSelectedLevel && activeTab === 'level') {
+      setActiveTab('projects');
+    }
+  }, [currentTrack, currentSelectedLevel, activeTab]);
 
   const handleTrackSelect = (selectedTrack: 'dev' | 'ops') => {
     // For tab navigation, manage track selection internally without navigation
@@ -156,7 +156,7 @@ export function MobileTabNavigation({
       </div>
 
       {/* Tab Content */}
-      <div className="flex-1 overflow-hidden">
+      <div className="flex-1 overflow-hidden min-h-0">
         {activeTab === 'track' && (
           <div className="h-full p-4 animate-in slide-in-from-right-2 duration-300">
             <TrackSelector
@@ -169,14 +169,15 @@ export function MobileTabNavigation({
         {activeTab === 'level' && currentTrack && (
           <div className="h-full p-4 animate-in slide-in-from-right-2 duration-300">
             {/* Custom Level Selector for Tab Navigation */}
-            <Card className="glass-dark border-0 rounded-2xl overflow-hidden gap-0" style={{paddingTop: 0, paddingBottom: 0}}>
-              <CardHeader className="sticky top-0 glass-dark z-10 border-b border-slate-600/30 bg-gradient-to-r from-slate-800/50 to-slate-700/50" style={{padding: '12px 16px 8px 16px'}}>
-                <CardTitle className="text-lg font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                  📊 Your Skills
-                </CardTitle>
-              </CardHeader>
-              <CardContent style={{padding: '8px 16px 16px 16px'}}>
-                <div className="space-y-3">
+            <div className="h-full overflow-y-auto -webkit-overflow-scrolling-touch">
+              <Card className="glass-dark border-0 rounded-2xl overflow-visible gap-0" style={{paddingTop: 0, paddingBottom: 0}}>
+                <CardHeader className="glass-dark z-10 border-b border-slate-600/30 bg-gradient-to-r from-slate-800/50 to-slate-700/50" style={{padding: '12px 16px 8px 16px'}}>
+                  <CardTitle className="text-lg font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                    📊 Your Skills
+                  </CardTitle>
+                </CardHeader>
+                <CardContent style={{padding: '8px 16px 16px 16px'}}>
+                  <div className="space-y-3 pb-4">
                   {levels.map((level, index) => (
                     <Button
                       key={level.id}
@@ -216,9 +217,10 @@ export function MobileTabNavigation({
                       </Badge>
                     </Button>
                   ))}
-                </div>
-              </CardContent>
-            </Card>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         )}
 
